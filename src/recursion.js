@@ -7,11 +7,28 @@
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
 var factorial = function(n) {
+	var ans = 1;
+	if (n <0) {
+		return null;
+	} else if (n ===1 || n ===0) {
+		return 1;
+	} else {
+		ans = factorial(n-1) * n;
+		return ans;
+	}
+	
 };
 
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
+	var arrayCopy = array.slice(0);
+	if (array.length <= 0){
+		return 0;
+	} else {
+		
+		return arrayCopy.shift() + sum(arrayCopy)
+	}
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
@@ -21,17 +38,51 @@ var arraySum = function(array) {
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+	if (n == 0){
+		return true;
+ 	} else if (n ==1){
+ 		return false;
+ 	}else if(n < 0) {
+		return isEven(-n);
+	} else {
+		return isEven(n-2);
+	}
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
-};
+	if (n ===0) {
+		return 0;
+	} else {
 
+		var ans = Math.abs(n)-1 + sumBelow(Math.abs(n)-1);
+		if (n < 0) {
+		  return ans * -1;
+		} else {
+		  return ans;
+		}
+	}
+
+};
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+
+	if (y-x === 2){
+		return [x+1];
+	} else if (Math.abs(y -x) < 2){
+		return [];
+	} else if (y - x < 2){
+		var rangeArray = range(x,(y+1));
+		rangeArray.push(y+1);
+		return rangeArray;
+	} else {
+		var rangeArray = range(x,(y-1));
+		rangeArray.push(y-1);
+		return rangeArray;
+	}
 };
 
 // 7. Compute the exponent of a number.
